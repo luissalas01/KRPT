@@ -75,7 +75,7 @@ class MyNavbar extends React.Component {
               <NavbarBrand className="mr-lg-5" to="/" tag={Link}>
                 <img
                   alt="..."
-                  src={require("assets/img/brand/argon-react-white.png")}
+                  src={require("assets/img/brand/Kripty-logo.png")}
                 />
               </NavbarBrand>
               <button className="navbar-toggler" id="navbar_global">
@@ -151,8 +151,8 @@ class MyNavbar extends React.Component {
                   </NavItem>
                   <NavItem className="d-none d-lg-block ml-lg-4">
                     <Button
-                      className="btn-neutral btn-icon"
-                      color="default"
+                      className="btn-icon"
+                      color="info"
                       href="https://www.creative-tim.com/product/argon-design-system-react?ref=adsr-navbar"
                       target="_blank"
                     >

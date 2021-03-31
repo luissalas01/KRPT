@@ -24,10 +24,22 @@
   border-color: rgb(133, 236, 235);
 }
 
+.btn-info:hover {
+  color: #fff;
+  background-color: #5C6C95;
+  border-color: #5C6C95;
+}
+
 .btn-success {
   color: #fff;
   background-color: rgb(2, 28, 88);
   border-color: rgb(2, 28, 88);
+}
+
+.btn-success:hover {
+  color: #fff;
+  background-color: #5C6C95;
+  border-color: #5C6C95;
 }
 
 .btn-group,

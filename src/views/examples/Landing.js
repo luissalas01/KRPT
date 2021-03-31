@@ -18,6 +18,8 @@
 import React from "react";
 // nodejs library that concatenates classes
 import classnames from "classnames";
+import backgroundBanner from "./../../assets/img/brand/bg-banner2x.png";
+import backgrounBody from "./../../assets/img/brand/Bg-icons.png";
 
 // reactstrap components
 import {
@@ -58,7 +60,7 @@ class Landing extends React.Component {
         <main ref="main">
           <div className="position-relative">
             {/* shape Hero */}
-            <section className="section section-lg section-shaped pb-250">
+            <section className="section section-lg pb-250" style={{ backgroundImage: `url(${backgroundBanner})`}}>
               <div className="shape shape-style-1 shape-default">
                 <span />
                 <span />
@@ -75,8 +77,8 @@ class Landing extends React.Component {
                   <Row className="d-flex justify-content-center">
                     <Col lg="6" className="text-center">
                       <div>
-                        <img src="https://i.pinimg.com/originals/39/0e/e1/390ee120731934bf9d91de4f3ea67bbf.jpg"
-                        style={{height: "400px", width: "500px", objectFit: "contain"}}></img>
+                        <img src={require("assets/img/brand/Kripty.png")}
+                        style={{height: "350px", width: "450px", objectFit: "contain"}}></img>
                       </div>
                     </Col>
                   </Row>
@@ -121,21 +123,42 @@ class Landing extends React.Component {
             </section>
             {/* 1st Hero Variation */}
           </div>
-          <section className="section section-lg pt-lg-0 mt--200">
+          <section className="section section-lg pt-lg-0 mt--10" style={{ backgroundImage: `url(${backgrounBody})`}}>
+            <Container className="py-lg-md d-flex">
+                <div className="col px-0">
+                  <Row className="d-flex justify-content-center">
+                    <Col lg="11" className="text-center">
+                      <h3 className="lead " style={{ color: "rgb(87, 96, 119)"}}>
+                        GET TO KNOW US
+                      </h3>
+                      <h1 className="display-3 text-black">
+                        International comunity <br></br>Global Descentralized Ecosystem
+                        
+                      </h1>
+                      <p className="lead " style={{ color: "rgb(87, 96, 119)"}}>
+                        Descentralized marketing is powered by the revolutionary smart contract technology*.<br></br>
+                        The code for Forsage's smart contractact can be seen here fully open, so you can be completely
+                        confident in the security and long-term operation of the project.
+                      </p>
+                    </Col>
+                  </Row>
+                </div>
+              </Container>
             <Container>
               <Row className="justify-content-center">
-                <Col lg="12" className="mb-4">
+                <Col lg="12" className="mb-5 mt-5">
                   <Row className="row-grid">
                     <Col lg="4">
                       <Card className="card-lift--hover shadow border-0">
                         <CardBody className="py-5">
-                          <div className="icon icon-shape icon-shape-primary rounded-circle mb-4">
-                            <i className="ni ni-check-bold" />
+                          <div className="icon icon-shape  mb-4">
+                            <img src={require("assets/img/brand/feat1.png")}
+                              style={{height: "50px", width: "60px", objectFit: "contain"}}></img>
                           </div>
                           <h6 style={{ color: "#000" }}>
                             Download Argon
                           </h6>
-                          <p className="description mt-3">
+                          <p className="description mt-3" >
                             Argon is a great free UI package based on Bootstrap
                             4 that includes the most important components and
                             features.
@@ -154,8 +177,9 @@ class Landing extends React.Component {
                     <Col lg="4">
                       <Card className="card-lift--hover shadow border-0" style={{ backgroundColor: "rgb(2,28,88)" }}>
                         <CardBody className="py-5" style={{ color: "#FFF" }}>
-                          <div className="icon icon-shape icon-shape-primary rounded-circle mb-4">
-                            <i className="ni ni-istanbul" />
+                        <div className="icon icon-shape  mb-4">
+                            <img src={require("assets/img/brand/feat2.png")}
+                              style={{height: "50px", width: "60px", objectFit: "contain"}}></img>
                           </div>
                           <h6 style={{ color: "#FFF" }}>
                             Build Something
@@ -179,8 +203,9 @@ class Landing extends React.Component {
                     <Col lg="4">
                       <Card className="card-lift--hover shadow border-0">
                         <CardBody className="py-5">
-                          <div className="icon icon-shape icon-shape-primary rounded-circle mb-4">
-                            <i className="ni ni-planet" />
+                          <div className="icon icon-shape  mb-4">
+                            <img src={require("assets/img/brand/feat3.png")}
+                              style={{height: "50px", width: "60px", objectFit: "contain"}}></img>
                           </div>
                           <h6 style={{ color: "#000" }}>
                             Prepare Launch
@@ -208,8 +233,9 @@ class Landing extends React.Component {
                     <Col lg="4">
                       <Card className="card-lift--hover shadow border-0">
                         <CardBody className="py-5">
-                          <div className="icon icon-shape icon-shape-primary rounded-circle mb-4">
-                            <i className="ni ni-check-bold" />
+                          <div className="icon icon-shape  mb-4">
+                            <img src={require("assets/img/brand/feat4.png")}
+                              style={{height: "50px", width: "60px", objectFit: "contain"}}></img>
                           </div>
                           <h6 style={{ color: "#000" }}>
                             Download Argon
@@ -233,8 +259,9 @@ class Landing extends React.Component {
                     <Col lg="4">
                       <Card className="card-lift--hover shadow border-0">
                         <CardBody className="py-5">
-                          <div className="icon icon-shape icon-shape-primary rounded-circle mb-4">
-                            <i className="ni ni-istanbul" />
+                          <div className="icon icon-shape  mb-4">
+                            <img src={require("assets/img/brand/feat5.png")}
+                              style={{height: "50px", width: "60px", objectFit: "contain"}}></img>
                           </div>
                           <h6 style={{ color: "#000" }}>
                             Build Something
@@ -258,8 +285,9 @@ class Landing extends React.Component {
                     <Col lg="4">
                       <Card className="card-lift--hover shadow border-0">
                         <CardBody className="py-5">
-                          <div className="icon icon-shape icon-shape-primary rounded-circle mb-4">
-                            <i className="ni ni-planet" />
+                          <div className="icon icon-shape  mb-4">
+                            <img src={require("assets/img/brand/feat6.png")}
+                              style={{height: "50px", width: "60px", objectFit: "contain"}}></img>
                           </div>
                           <h6 style={{ color: "#000" }}>
                             Prepare Launch
@@ -282,81 +310,10 @@ class Landing extends React.Component {
                     </Col>
                   </Row>
                 </Col>
-              </Row>
-            </Container>
-          </section>
-          <section className="section section-lg">
-            <Container>
-              <Row className="row-grid align-items-center">
-                <Col className="order-md-2" md="6">
-                  <img
-                    alt="..."
-                    className="img-fluid floating"
-                    src={require("assets/img/theme/promo-1.png")}
-                  />
-                </Col>
-                <Col className="order-md-1" md="6">
-                  <div className="pr-md-5">
-                    <div className="icon icon-lg icon-shape icon-shape-success shadow rounded-circle mb-5">
-                      <i className="ni ni-settings-gear-65" />
-                    </div>
-                    <h3>Awesome features</h3>
-                    <p>
-                      The kit comes with three pre-built pages to help you get
-                      started faster. You can change the text and images and
-                      you're good to go.
-                    </p>
-                    <ul className="list-unstyled mt-5">
-                      <li className="py-2">
-                        <div className="d-flex align-items-center">
-                          <div>
-                            <Badge
-                              className="badge-circle mr-3"
-                              color="success"
-                            >
-                              <i className="ni ni-settings-gear-65" />
-                            </Badge>
-                          </div>
-                          <div>
-                            <h6 className="mb-0">
-                              Carefully crafted components
-                            </h6>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="py-2">
-                        <div className="d-flex align-items-center">
-                          <div>
-                            <Badge
-                              className="badge-circle mr-3"
-                              color="success"
-                            >
-                              <i className="ni ni-html5" />
-                            </Badge>
-                          </div>
-                          <div>
-                            <h6 className="mb-0">Amazing page examples</h6>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="py-2">
-                        <div className="d-flex align-items-center">
-                          <div>
-                            <Badge
-                              className="badge-circle mr-3"
-                              color="success"
-                            >
-                              <i className="ni ni-satisfied" />
-                            </Badge>
-                          </div>
-                          <div>
-                            <h6 className="mb-0">
-                              Super friendly support team
-                            </h6>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
+                <Col lg="12" className="text-center">
+                  <div className="text-align-center">
+                    <img src={require("assets/img/brand/Description.png")}
+                        style={{height: "350px", width: "1000px", objectFit: "contain"}}></img>
                   </div>
                 </Col>
               </Row>
@@ -365,42 +322,84 @@ class Landing extends React.Component {
           <section className="section bg-secondary">
             <Container>
               <Row className="row-grid align-items-center">
-                <Col md="6">
-                  <Card className="bg-default shadow border-0">
-                    <CardImg
-                      alt="..."
-                      src={require("assets/img/theme/img-1-1200x1000.jpg")}
-                      top
-                    />
-                    <blockquote className="card-blockquote">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="svg-bg"
-                        preserveAspectRatio="none"
-                        viewBox="0 0 583 95"
-                      >
-                        <polygon
-                          className="fill-default"
-                          points="0,52 583,95 0,95"
-                        />
-                        <polygon
-                          className="fill-default"
-                          opacity=".2"
-                          points="0,42 583,95 683,0 0,95"
-                        />
-                      </svg>
-                      <h4 className="display-3 font-weight-bold text-white">
-                        Design System
-                      </h4>
-                      <p className="lead text-italic text-white">
-                        The Arctic Ocean freezes every winter and much of the
-                        sea-ice then thaws every summer, and that process will
-                        continue whatever happens.
+                
+                <Col md="12" className="mt--200" style={{ backgroundColor: "rgb(9,14,24)", borderRadius:"10px", height:"350px"}}>
+                  <Row className="pt-5">
+                  </Row>
+                  <Row className="d-flex justify-content-left pt-4">
+                    <Col md="1"></Col>
+                    <Col md="8">
+                      <h3 className="display-3 text-white">Check our numbers</h3>
+                      <p className="description mt-3" style={{color:"#FFF"}}>All data is store on the blockchain in the public domain and can be verified! <br></br>
+                        Contract address: 
                       </p>
-                    </blockquote>
-                  </Card>
+                    </Col>
+                    <Col md="3">
+                      <div className="pt-4 justify-content-right pr-5">
+                      <img
+                        alt="..."
+                        className=" img-center img-fluid shadow shadow-lg--hover"
+                        src={require("assets/img/brand/K.png")}
+                        style={{ width: "100px" }}
+                      />
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row className="d-flex justify-content-center">
+                    <Col md="2">
+                      <div className="pt-4 text-center">
+                        <h5 className="description text-white">
+                          <span className="d-block mb-1">Total Participants</span>
+                        </h5>
+                        <h3 className="display-4 text-white">
+                          1 280 139
+                        </h3>
+                      </div>
+                    </Col>
+                    <Col md="2">
+                      <div className="pt-4 text-center">
+                        <h5 className="description text-white">
+                          <span className="d-block mb-1">New Per Day</span>
+                        </h5>
+                        <h3 className="display-4 text-white">
+                          +2 370
+                        </h3>
+                      </div>
+                    </Col>
+                    <Col md="2">
+                      <div className="pt-4 text-center">
+                        <h5 className="description text-white">
+                          <span className="d-block mb-1">Total TRX Earned</span>
+                        </h5>
+                        <h3 className="display-4 text-white">
+                          1 470 139
+                        </h3>
+                      </div>
+                    </Col>
+                    <Col md="2">
+                      <div className="pt-4 text-center">
+                        <h5 className="description text-white">
+                          <span className="d-block mb-1">Total USD Earned</span>
+                        </h5>
+                        <h3 className="display-4 text-white">
+                          $64 350
+                        </h3>
+                      </div>
+                    </Col>
+                    <Col md="2">
+                      <div className="btn-wrapper d-flex flex-row-reverse">
+                        <Button
+                          className="btn-icon"
+                          color="info"
+                          href="https://demos.creative-tim.com/argon-design-system-react/#/documentation/alerts?ref=adsr-landing-page"
+                        >
+                          <span className="btn-inner--text">Get Started</span>
+                        </Button>
+                      </div>
+                    </Col>
+                  </Row> 
                 </Col>
-                <Col md="6">
+                <Col md="12">
                   <div className="pl-md-5">
                     <div className="icon icon-lg icon-shape icon-shape-warning shadow rounded-circle mb-5">
                       <i className="ni ni-settings" />

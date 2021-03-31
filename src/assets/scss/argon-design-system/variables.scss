@@ -244,7 +244,7 @@ $container-max-widths: (
   sm: 540px,
   md: 720px,
   lg: 960px,
-  xl: 1040px
+  xl: 1200px
 );
 
 @include _assert-ascending($container-max-widths, "$container-max-widths");
@@ -667,7 +667,7 @@ $navbar-nav-link-padding-x:         1rem !default;
 $navbar-nav-link-padding-y:         1rem !default;
 
 $navbar-nav-link-font-family:       $font-family-alt !default;
-$navbar-nav-link-font-size:         .9rem !default;
+$navbar-nav-link-font-size:         .95rem !default;
 $navbar-nav-link-font-weight:       400 !default;
 $navbar-nav-link-text-transform:    normal !default;
 $navbar-nav-link-letter-spacing:    0 !default;
