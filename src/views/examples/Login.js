@@ -35,8 +35,10 @@ import {
 } from "reactstrap";
 
 // core components
-import DemoNavbar from "components/Navbars/DemoNavbar.js";
+import MyNavbar from "components/Navbars/MyNavbar.js";
 import SimpleFooter from "components/Footers/SimpleFooter.js";
+import backgroundBanner from "./../../assets/img/brand/bg-banner2x.png";
+import Web3 from 'web3';
 
 class Login extends React.Component {
   componentDidMount() {
@@ -44,12 +46,26 @@ class Login extends React.Component {
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
   }
+
+  async Login() {
+    if (typeof window.ethereum !== 'undefined') {
+      const ethereum = window.ethereum;
+      const web3 = new Web3(ethereum);
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+      console.log(accounts[0])
+    }
+    else {
+      console.log('Please install metamask');
+    }
+  } 
+
+
   render() {
     return (
       <>
-        <DemoNavbar />
+        <MyNavbar />
         <main ref="main">
-          <section className="section section-shaped section-lg">
+          <section className="section section-shaped section-lg" style={{ backgroundImage: `url(${backgroundBanner})`}}>
             <div className="shape shape-style-1 bg-gradient-default">
               <span />
               <span />
@@ -63,91 +79,25 @@ class Login extends React.Component {
             <Container className="pt-lg-7">
               <Row className="justify-content-center">
                 <Col lg="5">
-                  <Card className="bg-secondary shadow border-0">
-                    <CardHeader className="bg-white pb-5">
-                      <div className="text-muted text-center mb-3">
-                        <small>Sign in with</small>
-                      </div>
-                      <div className="btn-wrapper text-center">
-                        <Button
-                          className="btn-neutral btn-icon"
-                          color="default"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <span className="btn-inner--icon mr-1">
-                            <img
-                              alt="..."
-                              src={require("assets/img/icons/common/github.svg")}
-                            />
-                          </span>
-                          <span className="btn-inner--text">Github</span>
-                        </Button>
-                        <Button
-                          className="btn-neutral btn-icon ml-1"
-                          color="default"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <span className="btn-inner--icon mr-1">
-                            <img
-                              alt="..."
-                              src={require("assets/img/icons/common/google.svg")}
-                            />
-                          </span>
-                          <span className="btn-inner--text">Google</span>
-                        </Button>
-                      </div>
-                    </CardHeader>
+                  <div>
+                    <img src={require("assets/img/brand/Kripty.png")}
+                      style={{height: "350px", width: "450px", objectFit: "contain"}}></img>
+                  </div>
+                  <Card className="bg-secondary shadow border-0 mt-300">
+                    
                     <CardBody className="px-lg-5 py-lg-5">
                       <div className="text-center text-muted mb-4">
-                        <small>Or sign in with credentials</small>
+
                       </div>
                       <Form role="form">
-                        <FormGroup className="mb-3">
-                          <InputGroup className="input-group-alternative">
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>
-                                <i className="ni ni-email-83" />
-                              </InputGroupText>
-                            </InputGroupAddon>
-                            <Input placeholder="Email" type="email" />
-                          </InputGroup>
-                        </FormGroup>
-                        <FormGroup>
-                          <InputGroup className="input-group-alternative">
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>
-                                <i className="ni ni-lock-circle-open" />
-                              </InputGroupText>
-                            </InputGroupAddon>
-                            <Input
-                              placeholder="Password"
-                              type="password"
-                              autoComplete="off"
-                            />
-                          </InputGroup>
-                        </FormGroup>
-                        <div className="custom-control custom-control-alternative custom-checkbox">
-                          <input
-                            className="custom-control-input"
-                            id=" customCheckLogin"
-                            type="checkbox"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor=" customCheckLogin"
-                          >
-                            <span>Remember me</span>
-                          </label>
-                        </div>
                         <div className="text-center">
                           <Button
                             className="my-4"
-                            color="primary"
+                            color="warning"
                             type="button"
+                            onClick={ this.Login}
                           >
-                            Sign in
+                            Link Metamask
                           </Button>
                         </div>
                       </Form>
@@ -160,7 +110,6 @@ class Login extends React.Component {
                         href="#pablo"
                         onClick={e => e.preventDefault()}
                       >
-                        <small>Forgot password?</small>
                       </a>
                     </Col>
                     <Col className="text-right" xs="6">
@@ -169,7 +118,6 @@ class Login extends React.Component {
                         href="#pablo"
                         onClick={e => e.preventDefault()}
                       >
-                        <small>Create new account</small>
                       </a>
                     </Col>
                   </Row>
@@ -178,7 +126,6 @@ class Login extends React.Component {
             </Container>
           </section>
         </main>
-        <SimpleFooter />
       </>
     );
   }

@@ -22,13 +22,13 @@ import { Button, Container, Row, Col, UncontrolledCarousel } from "reactstrap";
 
 const items = [
   {
-    src: require("assets/img/theme/img-1-1200x1000.jpg"),
+    src: require("assets/img/theme/Buzzerang.png"),
     altText: "",
     caption: "",
     header: ""
   },
   {
-    src: require("assets/img/theme/img-2-1200x1000.jpg"),
+    src: require("assets/img/theme/Buzzerang.png"),
     altText: "",
     caption: "",
     header: ""
@@ -49,26 +49,10 @@ class Carousel extends React.Component {
             <span />
           </div>
           <Container className="py-md">
-            <Row className="justify-content-between align-items-center">
-              <Col className="mb-5 mb-lg-0" lg="5">
-                <h1 className="text-white font-weight-light">
-                  Bootstrap carousel
-                </h1>
-                <p className="lead text-white mt-4">
-                  Argon Design System comes with four pre-built pages to help
-                  you get started faster. You can change the text and images and
-                  you're good to go.
-                </p>
-                <Button
-                  className="btn-white mt-4"
-                  color="default"
-                  href="https://demos.creative-tim.com/argon-design-system-react/#/documentation/alerts?ref=adsr-landing-page"
-                >
-                  See all components
-                </Button>
-              </Col>
-              <Col className="mb-lg-auto" lg="6">
-                <div className="rounded shadow-lg overflow-hidden transform-perspective-right">
+            <Row className="justify-content-center align-items-center">
+              <Col lg="2"></Col>
+              <Col className="mb-lg-auto" lg="10">
+                <div className="rounded shadow-lg overflow-hidden">
                   <UncontrolledCarousel items={items} />
                 </div>
               </Col>
