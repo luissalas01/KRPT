@@ -39,7 +39,7 @@ import {
   UncontrolledTooltip
 } from "reactstrap";
 
-class MyNavbar extends React.Component {
+class DashboardNavbar extends React.Component {
   componentDidMount() {
     let headroom = new Headroom(document.getElementById("navbar-main"));
     // initialise
@@ -110,45 +110,17 @@ class MyNavbar extends React.Component {
                   <UncontrolledDropdown nav>
                     <DropdownToggle nav>
                       <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">Token</span>
+                      <span className="nav-link-inner--text">Dashboard</span>
                     </DropdownToggle>
                   </UncontrolledDropdown>
                   <UncontrolledDropdown nav>
                     <DropdownToggle nav>
                       <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">Features</span>
-                    </DropdownToggle>
-                  </UncontrolledDropdown>
-                  <UncontrolledDropdown nav>
-                    <DropdownToggle nav>
-                      <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">Our Numbers</span>
-                    </DropdownToggle>
-                  </UncontrolledDropdown>
-                  <UncontrolledDropdown nav>
-                    <DropdownToggle nav>
-                      <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">FAQ</span>
+                      <span className="nav-link-inner--text">Claim tokens</span>
                     </DropdownToggle>
                   </UncontrolledDropdown>
                 </Nav>
                 <Nav className="align-items-lg-center ml-lg-auto" navbar>
-                  <NavItem>
-                    <NavLink
-                      className="nav-link-icon"
-                      href="https://github.com/creativetimofficial/argon-design-system-react"
-                      id="tooltip112445449"
-                      target="_blank"
-                    >
-                      <i className="fa fa-github" />
-                      <span className="nav-link-inner--text d-lg-none ml-2">
-                        Github
-                      </span>
-                    </NavLink>
-                    <UncontrolledTooltip delay={0} target="tooltip112445449">
-                      Star us on Github
-                    </UncontrolledTooltip>
-                  </NavItem>
                   <NavItem className="d-none d-lg-block ml-lg-4">
                     <Button
                       className="btn-icon"
@@ -174,4 +146,4 @@ class MyNavbar extends React.Component {
   }
 }
 
-export default MyNavbar;
+export default DashboardNavbar;

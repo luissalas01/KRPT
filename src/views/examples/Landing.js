@@ -324,7 +324,7 @@ class Landing extends React.Component {
             <Container>
               <Row className="row-grid align-items-center">
                 
-                <Col md="12" className="mt--200" style={{ backgroundColor: "rgb(9,14,24)", borderRadius:"10px", height:"350px"}}>
+                <Col md="12" className="mt--200" style={{ backgroundColor: "rgb(9,14,24)", borderRadius:"10px"}}>
                   <Row className="pt-5">
                   </Row>
                   <Row className="d-flex justify-content-left pt-4">

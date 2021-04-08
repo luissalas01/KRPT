@@ -34,33 +34,58 @@ import {
   Col
 } from "reactstrap";
 
+import { useHistory } from "react-router-dom";
+
 // core components
 import MyNavbar from "components/Navbars/MyNavbar.js";
+import DashboardNavbar from "components/Navbars/DashboardNavbar.js";
 import SimpleFooter from "components/Footers/SimpleFooter.js";
+import TablePorpouses from "components/Tables/TablePorpouses.js";
 import backgroundBanner from "./../../assets/img/brand/bg-banner2x.png";
+import ABI from "./Kripty.json";
 import Web3 from 'web3';
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+        activeUser: false,
+        activeAcc: '',
+        error: null,
+        isLoaded: false,
+        items: [],
+        web3: undefined,
+        contract: undefined
+    };
+}
+
   componentDidMount() {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
+
   }
 
-  async Login() {
+  Login = async () => {
+    
     if (typeof window.ethereum !== 'undefined') {
       const ethereum = window.ethereum;
-      const web3 = new Web3(ethereum);
       const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-      console.log(accounts[0])
+      this.setState({ activeUser: true, activeAcc: accounts[0] });
+      window.location.href='/Dashboard'
+      // history.push({pathname: '/Dashboard',
+      //   state: { activeUser: true, activeAcc: accounts[0] }
+      // });
     }
     else {
       console.log('Please install metamask');
     }
-  } 
+  }
 
 
   render() {
+    const { userActive } = this.state;
     return (
       <>
         <MyNavbar />
@@ -76,7 +101,7 @@ class Login extends React.Component {
               <span />
               <span />
             </div>
-            <Container className="pt-lg-7">
+            <Container className="pt-lg-12">
               <Row className="justify-content-center">
                 <Col lg="5">
                   <div>
@@ -87,7 +112,7 @@ class Login extends React.Component {
                     
                     <CardBody className="px-lg-5 py-lg-5">
                       <div className="text-center text-muted mb-4">
-
+                          To claim your tokens you need to link you metamask account
                       </div>
                       <Form role="form">
                         <div className="text-center">
@@ -132,3 +157,5 @@ class Login extends React.Component {
 }
 
 export default Login;
+
+

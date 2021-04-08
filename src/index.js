@@ -26,7 +26,7 @@ import "assets/scss/argon-design-system-react.scss?v1.1.0";
 import Index from "views/Index.js";
 import Landing from "views/examples/Landing.js";
 import Login from "views/examples/Login.js";
-import Profile from "views/examples/Profile.js";
+import Dashboard from "views/examples/Dashboard";
 import Register from "views/examples/Register.js";
 
 ReactDOM.render(
@@ -34,11 +34,9 @@ ReactDOM.render(
     <Switch>
       <Route path="/" exact render={props => <Landing {...props} />} />
       <Route path="/login-page" exact render={props => <Login {...props} />} />
-      {/* <Route
-        path="/register-page"
-        exact
-        render={props => <Register {...props} />}
-      /> */}
+      <Route
+        path="/Dashboard" exact render={props => <Dashboard {...props} />}
+      />
       <Redirect to="/" />
     </Switch>
   </BrowserRouter>,
