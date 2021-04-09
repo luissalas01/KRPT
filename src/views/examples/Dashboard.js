@@ -27,6 +27,7 @@ import {
   import backgroundBanner from "./../../assets/img/brand/bg-banner2x.png";
   import ABI from "./Kripty.json";
   import ABITOKEN from "./KriptyToken.json";
+  import ABIESCROW from "./KriptyEscrow.json";
   import Web3 from 'web3';
 
 class Dashboard extends React.Component {
@@ -43,39 +44,32 @@ class Dashboard extends React.Component {
             votes: 0,
             contract: undefined,
             unclaimedTokens: undefined,
+            updateData: false
         };
 
     }
 
-
-    async componentDidMount() {
+    loadData = async () => {
         const ethereum = window.ethereum;
-        const web3 = new Web3(ethereum);
-        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        console.log(accounts)
-        var contract = new web3.eth.Contract(ABI, '0x77fD68D119a440f04C5c383116B6a10c7C9Dc3d7');
-        var count = await contract.methods.proposalCount().call();
-        var token = new web3.eth.Contract(ABITOKEN, '0xaB64697e79c9695619D962DD441595CeEf4d17EF');
-        var votes = await token.methods.balanceOf(accounts[0]).call();
-        
-        var proposalss=[]
-        for (let i=1; i<=count; i++){
-            const prop = await this.getProposal(i, contract);
+            const web3 = new Web3(ethereum);
+            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+            var contract = new web3.eth.Contract(ABI, '0xb3B8C1F336E598F8cae955B6F34980fFCba63a2c');
+            var count = await contract.methods.proposalCount().call();
+            var token = new web3.eth.Contract(ABITOKEN, '0x1dd4c4778b14d95dDB058CaEfb00Da142B32C93d');
+            var votes = await token.methods.balanceOf(accounts[0]).call();
             
-            proposalss.push(prop);
-        }
+            var proposalss=[]
+            for (let i=1; i<=count; i++){
+                const prop = await this.getProposal(i, contract);
+                
+                proposalss.push(prop);
+            }
 
-         
-
-        if (window.tronWeb && window.tronWeb.defaultAddress.base58) {
-            const tronweb = window.tronWeb
-            var tronAddress = await tronweb.defaultAddress.hex;
-            console.log(tronAddress)
             const requestOptions = {
                     method: 'POST',
                     mode: 'cors',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ address: tronAddress})
+                    body: JSON.stringify({ address: accounts[0]})
             }
 
 
@@ -83,29 +77,20 @@ class Dashboard extends React.Component {
                 .then(response => response.json())
                 .then(data => this.setState({ unclaimedTokens: data.tokens }))
                 .catch(err => console.log(err))
-        }
+            
 
-        this.setState({items: proposalss, activeAcc: accounts[0], activeUser: true, web3, votes, contract}); 
+            this.setState({items: proposalss, activeAcc: accounts[0], activeUser: true, web3, votes, contract, updateData: false }); 
     }
 
-    async componentDidUpdate(prevState) {
-        // if (JSON.stringify(prevState) === JSON.stringify(this.state) && this.state.itemToVote) return true;
-        // if (!this.state.itemToVote){
-        //     const ethereum = window.ethereum;
-        //     const web3 = new Web3(ethereum);
-        //     const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        //     var contract = new web3.eth.Contract(ABI, '0x5b429c5600b193337c699F4103950c88d3bbfD85');
-        //     var count = await contract.methods.proposalCount().call();
-        //     var token = new web3.eth.Contract(ABITOKEN, '0x0C65C8644c515d3E56b559247117b71E5148f53E');
-        //     var votes = await token.methods.balanceOf(accounts[0]).call();
-        //     var proposalss=[]
-        //     for (let i=1; i<=count; i++){
-        //         const prop = await this.getProposal(i, contract);
-                
-        //         proposalss.push(prop);
-        //     }
-        //     this.setState({items: proposalss, activeAcc: accounts[0], activeUser: true, web3, votes, contract});
-        // }
+
+    async componentDidMount() {
+        this.loadData()
+    }
+
+    async componentDidUpdate(prevProps, prevState) {
+        if (prevState.updateData !== this.state.updateData && this.state.updateData){
+            this.loadData()
+        }
     }
 
     getProposal = async (item, contract) => {
@@ -126,37 +111,23 @@ class Dashboard extends React.Component {
         }
     }
 
-    voteFavor = async () => {
+    vote = async (support) => {
         const { contract, activeAcc, itemToVote, web3 } = this.state;
-        var token = new web3.eth.Contract(ABITOKEN, '0x0C65C8644c515d3E56b559247117b71E5148f53E');
-        
+        // var token = new web3.eth.Contract(ABITOKEN, '0x1dd4c4778b14d95dDB058CaEfb00Da142B32C93d');
         var gasPrice = await web3.eth.getGasPrice();
-        var estimateGas = await contract.methods.vote(activeAcc, itemToVote[0], true).estimateGas({ from: activeAcc, gasPrice})
-        var txHash = await contract.methods.vote(activeAcc, itemToVote[0], true).send({ from: activeAcc, gasPrice})
-        this.setState({ openModal: false, itemToVote: undefined,  })
-
-    }
-
-    voteAgainst = async () => {
-        const { contract, activeAcc, itemToVote, web3 } = this.state;
-        var token = new web3.eth.Contract(ABITOKEN, '0x0C65C8644c515d3E56b559247117b71E5148f53E');
-        
-        var gasPrice = await web3.eth.getGasPrice();
-        var estimateGas = await contract.methods.vote(activeAcc, itemToVote[0], false).estimateGas({ from: activeAcc, gasPrice})
-        var txHash = await contract.methods.vote(activeAcc, itemToVote[0], false).send({ from: activeAcc, gasPrice})
-        this.setState({ openModal: false, itemToVote: undefined })
+        // var estimateGas = await contract.methods.vote(activeAcc, itemToVote[0], false).estimateGas({ from: activeAcc, gasPrice})
+        var txHash = await contract.methods.vote(activeAcc, itemToVote[0], support).send({ from: activeAcc, gasPrice})
+        this.setState({ openModal: false, itemToVote: undefined, updateData: true })
     }
 
     claimTokens = async () => {
-        const { contract, activeAcc } = this.state;
+        const { activeAcc } = this.state;
         const ethereum = window.ethereum;
         const web3 = new Web3(ethereum);
-        var token = new web3.eth.Contract(ABITOKEN, '0x0C65C8644c515d3E56b559247117b71E5148f53E');
+        var escrow = new web3.eth.Contract(ABIESCROW, '0x41e3010dA4351eCb8b73f43FbF2C448E70De5CB5');
         var gasPrice = await web3.eth.getGasPrice();
-        var txHash = await token.methods.transfer(activeAcc, this.state.unclaimedTokens).send({ from: '0x0C65C8644c515d3E56b559247117b71E5148f53E', gasPrice});
-        this.setState({ unclaimedTokens: 0,  })
-        console.log(txHash)
-
+        var txHash = await escrow.methods.claimTokens(this.state.unclaimedTokens).send({ from: activeAcc, gasPrice});
+        this.setState({ unclaimedTokens: 0, updateData: true })
     }
 
     render() {
@@ -188,7 +159,7 @@ class Dashboard extends React.Component {
                                 Rewards
                                 </h6>
                                 <p className="description mt-3" >
-                                {this.state.unclaimedTokens} Unclaimed Kripty Tokens
+                                {this.state.unclaimedTokens - this.state.votes} Unclaimed Kripty Tokens
                                 </p>
                                 <Button
                                 className="mt-4"
@@ -235,13 +206,13 @@ class Dashboard extends React.Component {
                     <div className="modal-footer">
                         <Button color="primary" 
                         type="button"
-                        onClick={this.voteFavor}
+                        onClick={() => this.vote(true)}
                         >
                             Vote in favor
                         </Button>
                         <Button color="warning" 
                         type="button"
-                        onClick={this.voteAgainst}
+                        onClick={() => this.vote(false)}
                         >
                             Vote against
                         </Button>
