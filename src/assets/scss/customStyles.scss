@@ -1,0 +1,110 @@
+#myVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    height: auto;
+    width: auto;
+    z-index: -100;
+  }
+
+  .my-cover-video{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.botom-logo{
+    width: 250px;
+}
+
+@media (min-width: 320px) {
+    .my-cover-image{
+        background-image: url("../img/brand/FondoAnimado.gif"); 
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .brand-image{
+        width: 150px;
+        object-fit: contain;
+        margin-bottom: 10px;
+    }
+    .display-3 {
+        font-size: 1.25rem;
+    }
+    .lead {
+        font-size: 0.85rem;
+    }
+    .flex-row-reverse {
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    
+}
+
+@media (min-width: 560px) {
+
+    .my-cover-image{
+        background-image: url("../img/brand/FondoAnimado.gif"); 
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .brand-image{
+        margin-bottom: 10px;
+        width: 200px;
+        object-fit: contain;
+    }
+    .display-3 {
+        font-size: 1.85rem;
+    }
+    .lead {
+        font-size: 1.15rem;
+    }
+    .flex-row-reverse {
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+
+    .my-cover-image{
+        background-image: url("../img/brand/bg-banner2x.png"); 
+    }
+    .brand-image{
+        width: 250px;
+        object-fit: contain;
+        margin-bottom: 10px;
+    }
+    .display-3 {
+        font-size: 1.85rem;
+    }
+    .lead {
+        font-size: 1.15rem;
+    }
+    .flex-row-reverse {
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+}
+
+
+@media (min-width: 992px) {
+
+    .my-cover-image{
+        background-image: url("../img/brand/FondoAnimado.gif"); 
+        background-repeat: no-repeat;
+        background-size: cover; 
+    }
+}
+@media (min-width: 1200px) {
+ 
+    .my-cover-image{
+        background-image: url("../img/brand/FondoAnimado.gif"); 
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
+
+

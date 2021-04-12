@@ -18,7 +18,7 @@
 import React from "react";
 // nodejs library that concatenates classes
 import classnames from "classnames";
-import backgroundBanner from "./../../assets/img/brand/bg-banner2x.png";
+import backgroundBanner from "./../../assets/img/brand/FondoAnimado.mp4";
 import backgrounBody from "./../../assets/img/brand/Bg-icons.png";
 import Carousel from "./../IndexSections/Carousel.js"; 
 
@@ -61,7 +61,7 @@ class Landing extends React.Component {
         <main ref="main">
           <div className="position-relative">
             {/* shape Hero */}
-            <section className="section section-lg pb-250" style={{ backgroundImage: `url(${backgroundBanner})`}}>
+            <section className="section section-lg pb-250 my-cover-video">
               <div className="shape shape-style-1 shape-default">
                 <span />
                 <span />
@@ -73,13 +73,15 @@ class Landing extends React.Component {
                 <span />
                 <span />
               </div>
+              <video autoPlay muted loop id="myVideo">
+                <source src={backgroundBanner} type="video/mp4" />
+              </video>
               <Container className="py-lg-md d-flex">
                 <div className="col px-0">
                   <Row className="d-flex justify-content-center">
                     <Col lg="6" className="text-center">
                       <div>
-                        <img src={require("assets/img/brand/Kripty.png")}
-                        style={{height: "350px", width: "450px", objectFit: "contain"}}></img>
+                        <img src={require("assets/img/brand/Kripty.png")} className="brand-image"></img>
                       </div>
                     </Col>
                   </Row>
@@ -468,33 +470,39 @@ class Landing extends React.Component {
               </Card>
             </Container>
           </section>
-          <section className="section section-lg" style={{ backgroundColor:"#000", height:"500px"}}>
+          <section className="section section-lg" style={{ backgroundColor:"#000"}}>
             <Container className="pt-lg pb-300">
               <Row className="row-grid mt-5 align-items-center">
-                <Col lg="3">
-                  <div className="">
-                    <img
-                    alt="..."
-                    src={require("assets/img/brand/Kripty-logo.png")}
-                    />
-                  </div>
+                <Col lg="1"></Col>
+                <Col lg="3" sm="12" className="">
+                    <img src={require("assets/img/brand/Kripty-logo.png")} className="botom-logo"/>
                 </Col>
-                <Col lg="2">
-                  <p className="text-white mt-3" style={{ fontSize:"0.75rem", textAlign:"right"}}>
+                <Col lg="2" sm="12">
+                  <p className="text-white mt-3" style={{ fontSize:"0.75rem", textAlign:"left"}}>
                     Features
                   </p>
                 </Col>
-                <Col lg="2">
-                  <p className="text-white mt-3" style={{ fontSize:"0.75rem", textAlign:"center" }}>
+                <Col lg="2" sm="12">
+                  <p className="text-white mt-3" style={{ fontSize:"0.75rem", textAlign:"left" }}>
                     Our Numbers
                   </p>
                 </Col>
-                <Col lg="2">
+                <Col lg="2" sm="12">
                   <p className="text-white mt-3" style={{ fontSize:"0.75rem", textAlign:"left" }}>
                     FAQ
                   </p>
                 </Col>
-                <Col lg="3"></Col>
+                <Col lg="2" sm="12" style={{ fontSize:"2.25rem", textAlign:"cetner" }}>
+                  <span >
+                    <i className="fa fa-facebook-official" />
+                  </span>
+                  <span>
+                    <i className="fa fa-twitter" />
+                  </span>
+                  <span>
+                    <i className="fa fa-github"/>
+                  </span>
+                </Col>
               </Row>
             </Container>
           </section>
