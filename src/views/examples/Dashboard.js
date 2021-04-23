@@ -15,16 +15,13 @@ import {
     Container,
     Row,
     Col,
-    Modal
+    Modal,
+    Progress
   } from "reactstrap";
-  import { Redirect } from "react-router-dom";
   
   // core components
-  import MyNavbar from "components/Navbars/MyNavbar.js";
   import DashboardNavbar from "components/Navbars/DashboardNavbar.js";
-  import SimpleFooter from "components/Footers/SimpleFooter.js";
-  import TablePorpouses from "components/Tables/TablePorpouses.js";
-  import backgroundBanner from "./../../assets/img/brand/bg-banner2x.png";
+  import backgroundBanner from "./../../assets/img/brand/FondoAnimadoW.mp4";
   import ABI from "./Kripty.json";
   import ABITOKEN from "./KriptyToken.json";
   import ABIESCROW from "./KriptyEscrow.json";
@@ -43,8 +40,9 @@ class Dashboard extends React.Component {
             itemToVote: undefined,
             votes: 0,
             contract: undefined,
-            unclaimedTokens: undefined,
-            updateData: false
+            unclaimedTokens: 0,
+            updateData: false,
+            votingThreshold: 10000,
         };
 
     }
@@ -95,24 +93,25 @@ class Dashboard extends React.Component {
 
     getProposal = async (item, contract) => {
         var proposal = await contract.methods.proposals(item).call();
-        var proposalJson = [proposal.id, proposal.description, proposal.proVotes, proposal.againsVotes];
+        //var proposalJson = [proposal.id, proposal.description, proposal.proVotes, proposal.againsVotes];
         
-        return proposalJson;
+        return proposal;
     }
 
-    voteModal = (selected) => {
+    voteModal = () => {
         console.log(this.state.openModal)
         if (this.state.openModal) this.setState({ openModal: false, itemToVote: undefined });
         else {
             this.setState({
                 openModal: true,
-                itemToVote: selected
+                itemToVote: 1
             });
         }
     }
 
     vote = async (support) => {
         const { contract, activeAcc, itemToVote, web3 } = this.state;
+        console.log(this.state)
         // var token = new web3.eth.Contract(ABITOKEN, '0x1dd4c4778b14d95dDB058CaEfb00Da142B32C93d');
         var gasPrice = await web3.eth.getGasPrice();
         // var estimateGas = await contract.methods.vote(activeAcc, itemToVote[0], false).estimateGas({ from: activeAcc, gasPrice})
@@ -130,13 +129,53 @@ class Dashboard extends React.Component {
         this.setState({ unclaimedTokens: 0, updateData: true })
     }
 
+    getTextPercentage(value){
+        var total = this.state.votingThreshold
+        return ((value * 100) / total).toString()
+    }
+
+    renderCards(){
+        var items = this.state.items
+        console.log(items)
+        return items.map((item) => {
+            return (
+                <Col xl="3" lg="3" md="4" sm="10" xs="10" className="mb-4">
+                        <Card className=" shadow border-0">
+                            <CardHeader>
+                                <h6>Tipo</h6>
+                            </CardHeader>
+                            <CardBody className="py-3">
+                                <h6 style={{ color: "#000" }}>
+                                Descripcion
+                                </h6>
+                                <div className="pt-4">
+                                    <div className="text-center" >Favor votes</div>
+                                    <Progress color="voteFavor" value={this.getTextPercentage(item.proVotes)}>{item.proVotes  + "/" + this.state.votingThreshold}</Progress>
+                                    <div className="text-center" >Against votes</div>
+                                    <Progress color="warning" value={this.getTextPercentage(item.againsVotes)}>{item.againsVotes + "/" + this.state.votingThreshold }</Progress>
+                                </div>
+                                <Button
+                                className="mt-4"
+                                color="success"
+                                onClick={() => this.voteModal()}
+                                >
+                                Vote
+                                </Button>
+                            </CardBody>
+                        </Card>
+                    </Col>
+            )
+
+        })
+    }
+
     render() {
       return (
         <>
         <DashboardNavbar />
         <main ref="main">
-        <section className="section section-shaped section-lg" style={{ backgroundImage: `url(${backgroundBanner})`}}>
-            <div className="shape shape-style-1 bg-gradient-default">
+        <section className="section section-lg pb-250 my-cover-video" style={{ backgroundImage: `url(${backgroundBanner})`}}>
+            <div className="shape shape-style-1 shape-default">
             <span />
             <span />
             <span />
@@ -146,37 +185,11 @@ class Dashboard extends React.Component {
             <span />
             <span />
             </div>
+            <video autoPlay muted loop id="myVideo">
+                <source src={backgroundBanner} type="video/mp4" />
+            </video>
             <Container className="pt-lg-12 pb-5">
-                <Row className="justify-content-center">
-                    <Col lg="4">
-                        <Card className=" shadow border-0">
-                            <CardBody className="py-5">
-                                <div className="icon icon-shape">
-                                <img src={require("assets/img/brand/feat5.png")}
-                                    style={{height: "50px", width: "60px", objectFit: "contain"}}></img>
-                                </div>
-                                <h6 style={{ color: "#000" }}>
-                                Rewards
-                                </h6>
-                                <p className="description mt-3" >
-                                {this.state.unclaimedTokens - this.state.votes} Unclaimed Kripty Tokens
-                                </p>
-                                <Button
-                                className="mt-4"
-                                color="success"
-                                href="#pablo"
-                                onClick={this.claimTokens}
-                                >
-                                Claim tokens
-                                </Button>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col lg="8">hola</Col>
-                </Row>
-            </Container>
-            <Container className="pt-lg-12">
-                <Modal
+            <Modal
                     className="modal-dialog-centered"
                     toggle={() => this.setState({ openModal: false })}
                     isOpen={this.state.openModal}
@@ -204,7 +217,7 @@ class Dashboard extends React.Component {
                         </p>
                     </div>
                     <div className="modal-footer">
-                        <Button color="primary" 
+                        <Button className="modal-btn-primary" 
                         type="button"
                         onClick={() => this.vote(true)}
                         >
@@ -217,7 +230,7 @@ class Dashboard extends React.Component {
                             Vote against
                         </Button>
                         <Button
-                        className="ml-auto"
+                        className="ml-auto modal-btn-cancel"
                         color="link"
                         data-dismiss="modal"
                         type="button"
@@ -227,6 +240,27 @@ class Dashboard extends React.Component {
                         </Button>
                     </div>
                 </Modal>
+                <Row className="justify-content-right pb-5">
+                    <Col style={{textAlign: "right"}} >
+                        <Button
+                            className="mt-4 mr-4"
+                            color="info"
+                            href="#pablo"
+                            onClick={this.claimTokens}
+                            >
+                            {this.state.unclaimedTokens - this.state.votes == 0 ? 
+                            "Votes " + this.state.votes : 
+                            "Claim " + this.state.unclaimedTokens - this.state.votes + " tokens"}
+                        </Button>
+                    </Col>
+                </Row>
+                <Row className="justify-content-right">
+                    
+                    {this.renderCards()}
+                </Row>
+            </Container>
+            {/* <Container className="pt-lg-12">
+                
                 <Row className="justify-content-center">
                     <Col lg="4">
                         <Card className=" shadow border-0">
@@ -263,7 +297,7 @@ class Dashboard extends React.Component {
                         />
                     </Col>
                 </Row>
-            </Container>
+            </Container> */}
         </section>
         </main>
         </>

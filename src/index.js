@@ -33,7 +33,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/" exact render={props => <Landing {...props} />} />
-      <Route path="/login-page" exact render={props => <Login {...props} />} />
+      {/* <Route path="/login-page" exact render={props => <Login {...props} />} /> */}
       <Route
         path="/Dashboard" exact render={props => <Dashboard {...props} />}
       />

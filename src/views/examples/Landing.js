@@ -98,7 +98,7 @@ class Landing extends React.Component {
                         <Button
                           className="btn-icon mb-3 mb-sm-0"
                           color="info"
-                          href="/login-page"
+                          href="/Dashboard"
                         >
                           <span className="btn-inner--text">Get Started</span>
                         </Button>

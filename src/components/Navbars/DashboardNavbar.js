@@ -38,12 +38,27 @@ import {
   Col,
   UncontrolledTooltip
 } from "reactstrap";
+import Web3 from 'web3';
+import Blockies from 'react-blockies';
 
 class DashboardNavbar extends React.Component {
-  componentDidMount() {
+  constructor(props){
+    super(props)
+    this.state = {
+      activeAcc: ""
+    };
+  }
+
+  async componentDidMount() {
     let headroom = new Headroom(document.getElementById("navbar-main"));
     // initialise
     headroom.init();
+    const ethereum = window.ethereum;
+    const web3 = new Web3(ethereum);
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    this.setState({
+      activeAcc: accounts[0]
+    });
   }
   state = {
     collapseClasses: "",
@@ -75,7 +90,7 @@ class DashboardNavbar extends React.Component {
               <NavbarBrand className="mr-lg-5" to="/" tag={Link}>
                 <img
                   alt="..."
-                  src={require("assets/img/brand/Kripty-logo.png")}
+                  src={require("assets/img/brand/kriptyLogoBlue.png")}
                 />
               </NavbarBrand>
               <button className="navbar-toggler" id="navbar_global">
@@ -107,32 +122,29 @@ class DashboardNavbar extends React.Component {
                   </Row>
                 </div>
                 <Nav className="navbar-nav-hover align-items-lg-center" navbar>
-                  <UncontrolledDropdown nav>
-                    <DropdownToggle nav>
-                      <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">Dashboard</span>
-                    </DropdownToggle>
-                  </UncontrolledDropdown>
-                  <UncontrolledDropdown nav>
-                    <DropdownToggle nav>
-                      <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">Claim tokens</span>
-                    </DropdownToggle>
-                  </UncontrolledDropdown>
+                  
                 </Nav>
                 <Nav className="align-items-lg-center ml-lg-auto" navbar>
-                  <NavItem className="d-none d-lg-block ml-lg-4">
+                  <NavItem className=" d-lg-block ml-lg-4">
                     <Button
                       className="btn-icon"
                       color="info"
-                      href="https://www.creative-tim.com/product/argon-design-system-react?ref=adsr-navbar"
-                      target="_blank"
+                      href="#"
+                      target=""
+                      style={{backgroundColor: "#5C6C95", borderColor: "#5C6C95" }}
                     >
-                      <span className="btn-inner--icon">
-                        <i className="fa fa-cloud-download mr-2" />
-                      </span>
+                      
                       <span className="nav-link-inner--text ml-1">
-                        Whitepaper
+                        <Blockies
+                          seed={this.state.activeAcc}
+                          size={8} 
+                          scale={3} 
+                          color="#fff"
+                          bgColor="#021c58"
+                          spotColor="#abc"
+                          className="identicon mr-2 mb--2 blockie-rad"
+                        />
+                        {this.state.activeAcc}
                       </span>
                     </Button>
                   </NavItem>
