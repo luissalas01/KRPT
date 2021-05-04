@@ -45,7 +45,9 @@ class DashboardNavbar extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      activeAcc: ""
+      activeAcc: "",
+      collapseClasses: "",
+      collapseOpen: false
     };
   }
 
@@ -54,16 +56,17 @@ class DashboardNavbar extends React.Component {
     // initialise
     headroom.init();
     const ethereum = window.ethereum;
-    const web3 = new Web3(ethereum);
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-    this.setState({
-      activeAcc: accounts[0]
-    });
+    this.changeAccount(accounts);
+    ethereum.on('accountsChanged', this.changeAccount);
   }
-  state = {
-    collapseClasses: "",
-    collapseOpen: false
-  };
+  
+
+  changeAccount = (acc) => {
+    this.setState({
+      activeAcc: acc[0]
+      });
+  }
 
   onExiting = () => {
     this.setState({

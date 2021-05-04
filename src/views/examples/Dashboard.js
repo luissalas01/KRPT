@@ -49,40 +49,41 @@ class Dashboard extends React.Component {
 
     loadData = async () => {
         const ethereum = window.ethereum;
-            const web3 = new Web3(ethereum);
-            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-            var contract = new web3.eth.Contract(ABI, '0xb3B8C1F336E598F8cae955B6F34980fFCba63a2c');
-            var count = await contract.methods.proposalCount().call();
-            var token = new web3.eth.Contract(ABITOKEN, '0x1dd4c4778b14d95dDB058CaEfb00Da142B32C93d');
-            var votes = await token.methods.balanceOf(accounts[0]).call();
+        const web3 = new Web3(ethereum);
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        var contract = new web3.eth.Contract(ABI, '0xb3B8C1F336E598F8cae955B6F34980fFCba63a2c');
+        var count = await contract.methods.proposalCount().call();
+        var token = new web3.eth.Contract(ABITOKEN, '0x1dd4c4778b14d95dDB058CaEfb00Da142B32C93d');
+        var votes = await token.methods.balanceOf(accounts[0]).call();
+        
+        var proposalss=[]
+        for (let i=1; i<=count; i++){
+            const prop = await this.getProposal(i, contract);
             
-            var proposalss=[]
-            for (let i=1; i<=count; i++){
-                const prop = await this.getProposal(i, contract);
-                
-                proposalss.push(prop);
-            }
+            proposalss.push(prop);
+        }
 
-            const requestOptions = {
-                    method: 'POST',
-                    mode: 'cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ address: accounts[0]})
-            }
+        const requestOptions = {
+                method: 'POST',
+                mode: 'cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ address: accounts[0]})
+        }
 
 
-            await fetch("https://api.buzzerang.io/user/data/tokens", requestOptions)
-                .then(response => response.json())
-                .then(data => this.setState({ unclaimedTokens: data.tokens }))
-                .catch(err => console.log(err))
-            
+        await fetch("https://api.buzzerang.io/user/data/tokens", requestOptions)
+            .then(response => response.json())
+            .then(data => this.setState({ unclaimedTokens: data.tokens }))
+            .catch(err => console.log(err))
+        
 
-            this.setState({items: proposalss, activeAcc: accounts[0], activeUser: true, web3, votes, contract, updateData: false }); 
+        this.setState({items: proposalss, activeAcc: accounts[0], activeUser: true, web3, votes, contract, updateData: false }); 
     }
 
 
     async componentDidMount() {
         this.loadData()
+        window.ethereum.on('accountsChanged',  this.loadData);
     }
 
     async componentDidUpdate(prevProps, prevState) {

@@ -159,7 +159,7 @@ class Landing extends React.Component {
                               style={{height: "50px", width: "60px", objectFit: "contain"}}></img>
                           </div>
                           <h6 style={{ color: "#000" }}>
-                            Download Argon
+                            All on chain
                           </h6>
                           <p className="description mt-3" >
                             Argon is a great free UI package based on Bootstrap
@@ -185,7 +185,7 @@ class Landing extends React.Component {
                               style={{height: "50px", width: "60px", objectFit: "contain"}}></img>
                           </div>
                           <h6 style={{ color: "#FFF" }}>
-                            Build Something
+                            Create your own business
                           </h6>
                           <p className="description mt-3">
                             Argon is a great free UI package based on Bootstrap
@@ -211,7 +211,7 @@ class Landing extends React.Component {
                               style={{height: "50px", width: "60px", objectFit: "contain"}}></img>
                           </div>
                           <h6 style={{ color: "#000" }}>
-                            Prepare Launch
+                            Biggest DAO comunity
                           </h6>
                           <p className="description mt-3">
                             Argon is a great free UI package based on Bootstrap
@@ -241,7 +241,7 @@ class Landing extends React.Component {
                               style={{height: "50px", width: "60px", objectFit: "contain"}}></img>
                           </div>
                           <h6 style={{ color: "#000" }}>
-                            Download Argon
+                            Stay connected anywhre
                           </h6>
                           <p className="description mt-3">
                             Argon is a great free UI package based on Bootstrap
@@ -267,7 +267,7 @@ class Landing extends React.Component {
                               style={{height: "50px", width: "60px", objectFit: "contain"}}></img>
                           </div>
                           <h6 style={{ color: "#000" }}>
-                            Build Something
+                            Get special rewards
                           </h6>
                           <p className="description mt-3">
                             Argon is a great free UI package based on Bootstrap
@@ -293,7 +293,7 @@ class Landing extends React.Component {
                               style={{height: "50px", width: "60px", objectFit: "contain"}}></img>
                           </div>
                           <h6 style={{ color: "#000" }}>
-                            Prepare Launch
+                            Take control
                           </h6>
                           <p className="description mt-3">
                             Argon is a great free UI package based on Bootstrap
